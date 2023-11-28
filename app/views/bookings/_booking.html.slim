@@ -1,0 +1,39 @@
+| <div id="
+= dom_id booking
+| "> 
+p.my-5
+  strong.block.font-medium.mb-1
+    | Record locator:
+  = booking.record_locator
+p.my-5
+  strong.block.font-medium.mb-1
+    | Checkin:
+  = booking.checkin
+p.my-5
+  strong.block.font-medium.mb-1
+    | Checkout:
+  = booking.checkout
+p.my-5
+  strong.block.font-medium.mb-1
+    | Total fare:
+  = booking.total_fare
+p.my-5
+  strong.block.font-medium.mb-1
+    | Total tax:
+  = booking.total_tax
+p.my-5
+  strong.block.font-medium.mb-1
+    | Primary contact:
+  = booking.primary_contact_id
+p.my-5
+  strong.block.font-medium.mb-1
+    | Emergency contact:
+  = booking.emergency_contact_id
+p.my-5
+  strong.block.font-medium.mb-1
+    | Room:
+  = booking.room_id
+- if action_name != "show"
+  = link_to "Show this booking", booking, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  = link_to "Edit this booking", edit_booking_path(booking), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+  hr.mt-6

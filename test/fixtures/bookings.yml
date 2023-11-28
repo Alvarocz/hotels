@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  record_locator: MyString
+  checkin: 2023-11-27 17:27:26
+  checkout: 2023-11-27 17:27:26
+  total_fare: 1.5
+  total_tax: 1.5
+  primary_contact: one
+  emergency_contact: one
+  room: one
+
+two:
+  record_locator: MyString
+  checkin: 2023-11-27 17:27:26
+  checkout: 2023-11-27 17:27:26
+  total_fare: 1.5
+  total_tax: 1.5
+  primary_contact: two
+  emergency_contact: two
+  room: two

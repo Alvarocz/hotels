@@ -1,0 +1,7 @@
+h2 = hotel.name
+
+p = hotel.description
+
+- if action_name != "show"
+  = link_to "Editar", edit_hotel_path(hotel), class: "btn btn-primary mb-2"
+  = link_to "Ir a detalles", hotel

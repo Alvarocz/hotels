@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title
+      | Hoteles&nbsp
+      = yield :title
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    // = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = javascript_importmap_tags
+  body
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid
+        a.navbar-brand[href="#"]
+          | Hoteles
+        button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse
+          ul.navbar-nav
+            li.nav-item
+              a.nav-link.active[aria-current="page" href="/"]
+                | Inicio
+            li.nav-item
+            - if agent_signed_in?
+              a.nav-link[href="#{hotels_path}" tabindex="-1" aria-disabled="true"]
+                | Panel de administración
+            - else
+              a.nav-link[href="#{agent_session_path}" tabindex="-1" aria-disabled="true"]
+                | Iniciar sesión
+
+    = yield

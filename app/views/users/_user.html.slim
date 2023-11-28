@@ -1,0 +1,43 @@
+| <div id="
+= dom_id user
+| "> 
+p.my-5
+  strong.block.font-medium.mb-1
+    | First name:
+  = user.first_name
+p.my-5
+  strong.block.font-medium.mb-1
+    | Last name:
+  = user.last_name
+p.my-5
+  strong.block.font-medium.mb-1
+    | Birth date:
+  = user.birth_date
+p.my-5
+  strong.block.font-medium.mb-1
+    | Gender:
+  = user.gender
+p.my-5
+  strong.block.font-medium.mb-1
+    | Document type:
+  = user.document_type
+p.my-5
+  strong.block.font-medium.mb-1
+    | Document number:
+  = user.document_number
+p.my-5
+  strong.block.font-medium.mb-1
+    | Email:
+  = user.email
+p.my-5
+  strong.block.font-medium.mb-1
+    | Phone number:
+  = user.phone_number
+p.my-5
+  strong.block.font-medium.mb-1
+    | Booking:
+  = user.booking_id
+- if action_name != "show"
+  = link_to "Show this user", user, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  = link_to "Edit this user", edit_user_path(user), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+  hr.mt-6

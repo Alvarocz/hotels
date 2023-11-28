@@ -1,0 +1,7 @@
+= form_with(model: room_type) do |form|
+  = form.hidden_field :hotel_id, value: @hotel.id
+  .row
+    .input-group.col-sm-8
+      = form.text_field :name, class: "form-control", placeholder: "Nombre"
+      = form.text_field :size, class: "form-control", placeholder: "Tamaño"
+      = form.submit class: "btn btn-primary"

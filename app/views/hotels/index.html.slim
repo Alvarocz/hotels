@@ -1,0 +1,38 @@
+.container-fluid
+  h1 Hoteles
+  - if notice.present?
+    .alert.alert-primary[role="alert"]
+      = notice
+  = link_to "Nuevo hotel", new_hotel_path, class: "btn btn-primary btn-block"
+  table.table
+    thead
+      tr
+        th[scope="col"]
+          | Nombre
+        th[scope="col"]
+          | Description
+        th[scope="col"]
+          | Habitaciones
+        th[scope="col"]
+          | Ciudad
+        th[scope="col"]
+          | Activo
+        th[scope="col"]
+          | Fecha de creación
+    tbody
+      - for hotel in @hotels
+        tr
+          td
+            = link_to hotel.name, hotel
+          td
+            = hotel.description
+          td
+            = hotel.num_rooms
+          td
+            = hotel.city
+            | ,&nbsp
+            = hotel.country
+          td
+            = hotel.is_active
+          td
+            = l hotel.created_at

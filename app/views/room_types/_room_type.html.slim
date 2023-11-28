@@ -1,0 +1,19 @@
+| <div id="
+= dom_id room_type
+| "> 
+p.my-5
+  strong.block.font-medium.mb-1
+    | Name:
+  = room_type.name
+p.my-5
+  strong.block.font-medium.mb-1
+    | Size:
+  = room_type.size
+p.my-5
+  strong.block.font-medium.mb-1
+    | Hotel:
+  = room_type.hotel_id
+- if action_name != "show"
+  = link_to "Show this room type", room_type, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  = link_to "Edit this room type", edit_room_type_path(room_type), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+  hr.mt-6

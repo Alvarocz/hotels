@@ -1,0 +1,79 @@
+es:
+  activerecord:
+    attributes:
+      agent:
+        first_name: Nombre
+        last_name: Apellido
+        gender: Género
+        document_type: Tipo de documento
+        document_number: Número de documento
+        phone_number: Teléfono
+      booking:
+        record_locator: Código de reserva
+        checkin: Fecha de llegada
+        checkout: Fecha de salida
+        total_fare: Tarifa
+        total_tax: Impuestos
+        hotel: Hotel
+        room: Habitación
+      contact:
+        type: Tipo
+        name: Nombre completo
+        phone_number: Teléfono
+        booking: Reserva
+      hotel:
+        name: Nombre
+        description: Descripción
+        num_rooms: Núemero de habitaciones
+        city: Ciudad
+        country: País
+        is_active: Activo
+        agent: Agente
+      passenger:
+        first_name: Nombre
+        last_name: Apellido
+        birth_date: Fecha de nacimiento
+        gender: Género
+        document_type: Tipo de documento
+        document_number: Número de documento
+        email: Correo
+        phone_number: Número de teléfono
+        booking: Reserva
+      room_type:
+        name: Nombre
+        size: Capacidad
+        hotel: Hotel
+      room:
+        room_type_id: Tipo de habitación
+        identifier: Número
+        base_price: Precio base
+        taxes: Impuestos
+        max_persons: Capacidad
+        is_active: Activa
+        hotel: Hotel
+    errors:
+      messages:
+        required: Requerido
+  activemodel:
+    errors:
+      models:
+        authenticate_user:
+          failure: Correo o contraseña incorrectos
+  devise:
+    registrations:
+      agent:
+        signed_up: Has iniciado sesión
+  helpers:
+    submit:
+      create: Crear
+      update: Guardar
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+  checkin: Fecha de llegada
+  checkout: Fecha de salida
+  guests: Huéspedes
+  destination_city: Ciudad de destino

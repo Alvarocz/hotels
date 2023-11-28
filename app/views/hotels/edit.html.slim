@@ -1,0 +1,9 @@
+= content_for :title
+  | |&nbsp
+  = @hotel.name
+.container
+  h2 Modificar hotel
+  = render "form", hotel: @hotel
+  = link_to "Detalles", @hotel, class: "btn btn-light btn-block mb-2"
+  br
+  = link_to "Ir a hoteles", hotels_path

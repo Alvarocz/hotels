@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  identifier: MyString
+  base_price: 1.5
+  taxes: 1.5
+  max_persons: 1
+  hotel: one
+  is_active: false
+
+two:
+  type: 
+  identifier: MyString
+  base_price: 1.5
+  taxes: 1.5
+  max_persons: 1
+  hotel: two
+  is_active: false

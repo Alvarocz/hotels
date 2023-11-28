@@ -1,0 +1,33 @@
+= content_for :title
+  = @hotel.name
+.container-fluid
+  - if notice.present?
+    .alert.alert-primary[role="alert"]
+      = notice
+  - if alert.present?
+    .alert.alert-danger[role="alert"]
+      = alert
+  .row
+    .col-sm-12
+    = link_to "Ir a hoteles", hotels_path, class: "my-2"
+
+  = render @hotel
+
+  .row
+    .col-sm-2.col-md-1
+      = link_to "Editar", edit_hotel_path(@hotel), class: "btn btn-primary mb-2"
+    .col-sm-2.col-md-1
+      = button_to "Eliminar", hotel_path(@hotel), method: :delete, class: "btn btn-danger"
+.container-fluid
+  .row
+    .col-sm-1.col-md-5.border.bg-light.py-4
+      h4 Tipos de habitaciones
+      = render "room_types/form", room_type: @room_type
+      hr/
+      = render "room_types/index", room_types: @room_types
+    .col-sm-1.col-md-7.border.bg-light.py-4
+      h4 Habitaciones
+      - if @room_types.present?
+        = render "rooms/form", room: @room
+        hr
+      = render "rooms/index", rooms: @hotel.rooms

@@ -1,0 +1,31 @@
+table.table
+  thead
+    tr
+      th[scope="col"]
+        | Tipo
+      th[scope="col"]
+        | Número
+      th[scope="col"]
+        | Precio base
+      th[scope="col"]
+        | Impuestos
+      th[scope="col"]
+        | Capacidad
+      th[scope="col"]
+        | Activa
+      th[scope="col"]
+        | Acciones
+  tbody
+    - for room in rooms
+      tr
+        th = room.room_type.name
+        td = room.identifier
+        td = room.base_price
+        td = room.taxes
+        td = room.max_persons
+        td = room.is_active
+        td
+          a(href="#{room_path(room)}")
+            i.fa-solid.fa-eye
+          a(href="#{edit_room_path(room)}")
+            i.fa-solid.fa-pen-to-square

@@ -1,0 +1,12 @@
+table.table
+  thead
+    tr
+      th[scope="col"]
+        | Nombre
+      th[scope="col"]
+        | Tamaño
+  tbody
+    - for room_type in room_types
+      tr
+        th = room_type.name
+        td = room_type.size
