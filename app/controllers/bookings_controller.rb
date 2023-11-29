@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  skip_before_action :authenticate_agent!
   before_action :set_booking, only: %i[ show edit update destroy ]
 
   # GET /bookings or /bookings.json

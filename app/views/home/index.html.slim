@@ -12,7 +12,7 @@
     li.nav-item
       .form-outline
         = f.label :guests, class: "form-label"
-        = f.number_field :guests, value: @guests, class: "form-control"
+        = f.number_field :guests, value: @guests, min: 1, class: "form-control"
     li.nav-item
       .form-outline
         = f.label :destination_city, class: "form-label"

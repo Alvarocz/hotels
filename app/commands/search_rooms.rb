@@ -7,7 +7,7 @@ class SearchRooms
   end
 
   def call
-    if @params[:checkin].present? && @params[:checkout].present?
+    if @params[:checkin].present? && @params[:checkout].present? && @params[:destination_city].present?
       return Room
         .includes(:hotel)
         .left_joins(:bookings, :hotel)
