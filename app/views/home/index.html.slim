@@ -15,13 +15,13 @@
     li.nav-item
       .form-outline
         = f.label :destination_city, class: "form-label"
-        = f.text_field :destination_city, value: @destination_city, class: "form-control"
+        = f.select :destination_city, @cities, {}, {value: @destination_city, class: "form-select"}
     li.nav-item
       = f.submit "Buscar", class: "btn btn-light btn-block mt-4 mx-4"
 
 .container-md
   .row
     - for room in @rooms
-      .col-sm-6.col-md-4.col-lg-3
+      .col-sm-6.col-lg-4
         = render "rooms/card", room: room
 

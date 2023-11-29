@@ -53,7 +53,7 @@ es:
         hotel: Hotel
     errors:
       messages:
-        required: Requerido
+        required: requerido
   activemodel:
     errors:
       models:
@@ -62,18 +62,31 @@ es:
   devise:
     registrations:
       agent:
-        signed_up: Has iniciado sesión
+        signed_up: Se ha completado el registro
+    sessions:
+      agent:
+        signed_in: Has iniciado sesión
   helpers:
     submit:
       create: Crear
       update: Guardar
+    label:
+      checkin: Fecha de llegada
+      checkout: Fecha de salida
+      guests: Huéspedes
+      destination_city: Ciudad de destino
   date:
     formats:
       default: "%d/%m/%Y"
   time:
     formats:
-      default: "%d/%m/%Y %H:%M"
-  checkin: Fecha de llegada
-  checkout: Fecha de salida
-  guests: Huéspedes
-  destination_city: Ciudad de destino
+      default: "%d/%m/%Y %H:%M:%S"
+  number:
+    currency:
+      format:
+        unit: '$'
+        delimiter: '.'
+        separator: ','
+        precision: 2
+  emergency: de emergencia
+  primary: principal

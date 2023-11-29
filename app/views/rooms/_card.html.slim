@@ -1,14 +1,17 @@
 .card.mt-4
-  img.card-img-top[src="https://placehold.co/286x180" alt=""]
+  img.card-img-top[src="https://www.worldwideinsure.com/travel-blog/wp-content/uploads/2017/12/Hotel-Room-Image-by-Megha01-CC0.jpg" alt=""]
   .card-body
     h5.card-title
       => room.room_type.name
       |> para
       = room.max_persons
       =< 'personas'.pluralize(room.max_persons)
+    p
+      |> Hotel
+      = room.hotel.name
     p.card-text.text-primary
       |> Precio: $
-      = room.total_price
+      = room.base_price
     = link_to\
       "¡Lo quiero!",
       {controller: :bookings, action: :new, room_id: room.id, checkin: @checkin, checkout: @checkout, guests: @guests},

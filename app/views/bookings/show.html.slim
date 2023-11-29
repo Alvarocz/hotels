@@ -1,10 +1,11 @@
-.mx-auto.md:w-2/3.w-full.flex
-  .mx-auto
-    - if notice.present?
-      p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block
-        = notice
-    = render @booking
-    = link_to "Edit this booking", edit_booking_path(@booking), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-    .inline-block.ml-2
-      = button_to "Destroy this booking", booking_path(@booking), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
-    = link_to "Back to bookings", bookings_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+.container
+  - if notice.present?
+    .alert.alert-primary(role="alert")
+      = notice
+  = render @booking
+  .row.mb-2
+    .col-sm-6.col-md-2
+      = link_to "Editar", edit_booking_path(@booking), class: "btn btn-primary"
+    .col-sm-6.col-md-2
+      = button_to "Eliminar", booking_path(@booking), method: :delete, class: "btn btn-danger"
+  = link_to "Ir a reservas", bookings_path

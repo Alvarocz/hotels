@@ -1,6 +1,6 @@
-.mx-auto.md:w-2/3.w-full
-  h1.font-bold.text-4xl
-    | Editing booking
+.container
+  h1 Editar reserva
   = render "form", booking: @booking
-  = link_to "Show this booking", @booking, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-  = link_to "Back to bookings", bookings_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  = link_to "Detalles", @booking, class: "btn btn-light btn-block mb-2"
+  br/
+  = link_to "Ir a reservas", bookings_path

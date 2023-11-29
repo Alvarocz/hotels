@@ -30,7 +30,7 @@ class HotelsController < ApplicationController
 
     respond_to do |format|
       if @hotel.save
-        format.html { redirect_to hotel_url(@hotel), notice: "El hotel #{@hotel.name} fue creado exitosamente.}" }
+        format.html { redirect_to hotel_url(@hotel), notice: "El hotel #{@hotel.name} fue creado exitosamente." }
         format.json { render :show, status: :created, location: @hotel }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class HotelsController < ApplicationController
   def update
     respond_to do |format|
       if @hotel.update(hotel_params)
-        format.html { redirect_to hotel_url(@hotel), notice: "El hotel #{@hotel.name} fue actualizado exitosamente}" }
+        format.html { redirect_to hotel_url(@hotel), notice: "El hotel #{@hotel.name} fue actualizado exitosamente" }
         format.json { render :show, status: :ok, location: @hotel }
       else
         format.html { render :edit, status: :unprocessable_entity }

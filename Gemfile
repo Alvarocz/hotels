@@ -19,10 +19,10 @@ gem "puma", ">= 5.0"
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# Hotwire"s SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+# Hotwire"s modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -79,5 +79,6 @@ gem "bootstrap", "~> 5.0"
 
 gem "font-awesome-sass", "~> 6.4.2"
 
-gem 'simple_command'
+gem "simple_command"
+
 gem "importmap-rails", "~> 1.2"

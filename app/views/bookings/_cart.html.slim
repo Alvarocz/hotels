@@ -1,0 +1,15 @@
+table.table
+  thead
+    tr
+      th Concepto
+      th Valor
+  tbody
+    tr
+      td Tarifa
+      td = number_to_currency(booking.total_fare)
+    tr
+      td Impuestos
+      td = number_to_currency(booking.total_tax)
+    tr
+      td Total
+      td = number_to_currency(booking.total)

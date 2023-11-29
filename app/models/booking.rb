@@ -7,4 +7,8 @@ class Booking < ApplicationRecord
 
   accepts_nested_attributes_for :contacts
   accepts_nested_attributes_for :passengers
+
+  def total
+    total_fare + total_tax
+  end
 end

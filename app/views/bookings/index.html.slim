@@ -1,10 +1,32 @@
-.w-full
-  - if notice.present?
-    p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block
-      = notice
-  .flex.justify-between.items-center
-    h1.font-bold.text-4xl
-      | Bookings
-    = link_to "New booking", new_booking_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"
-  #bookings.min-w-full
-    = render @bookings
+.container-fluid
+  = form_with(method: :get, data: {turbo_frame: "bookings"}) do |f|
+    ul.nav.justify-content-center.border-bottom.py-2
+      li.nav-item
+        .form-outline
+          = f.label :record_locator, class: "form-label"
+          = f.text_field :record_locator, autofocus: true, placeholder: "ABCXYZ", class: "form-control"
+      li.nav-item
+        .form-outline
+          = f.label :document_number, class: "form-label"
+          = f.text_field :document_number, class: "form-control"
+      li.nav-item
+        = f.submit "Buscar", class: "btn btn-light btn-block mt-4 mx-4"
+  table.table
+    thead
+      tr
+        th Código de reserva
+        th Fecha de creación
+        th Check-in
+        th Check-out
+        th Hotel
+        th Habitación
+    tbody
+      - for booking in @bookings
+        tr
+          td
+            = link_to booking.record_locator, booking_path(booking)
+          td = l booking.created_at
+          td = l booking.checkin
+          td = l booking.checkout
+          td = booking.hotel.name
+          td = booking.room.room_type.name

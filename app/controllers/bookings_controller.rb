@@ -3,7 +3,20 @@ class BookingsController < ApplicationController
 
   # GET /bookings or /bookings.json
   def index
-    @bookings = Booking.all
+    record_locator = params[:record_locator]
+    document_number = params[:document_number]
+    if record_locator.present?
+      @bookings = Booking.includes(:hotel, room: [:room_type]).where(record_locator: record_locator)
+    elsif document_number.present?
+      @bookings = Booking
+        .includes(:hotel, room: [:room_type])
+        .joins(:passengers)
+        .where("passengers.document_number = ?", document_number)
+        .distinct
+    else
+      @bookings = Booking.none
+    end
+    @bookings.order(created_at: :desc)
   end
 
   # GET /bookings/1 or /bookings/1.json
@@ -12,16 +25,21 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @checkin = params[:checkin]
-    @checkout = params[:checkout]
-    @guests = params[:guests].to_i
-    @room = Room.includes(:room_type).find(params[:room_id])
-    @total_fare = @room.base_price * @guests
-    @total_tax = @total_fare * @room.taxes
+    guests = params[:guests].to_i
+    room = Room.includes(:room_type, :hotel).find(params[:room_id])
+    total_fare = room.base_price * guests
+    total_tax = total_fare * (room.taxes / 100)
 
     @genders = %w[Masculino Femenino Otro]
-    @booking = Booking.new
-    @guests.times { @booking.passengers.build }
+    @booking = Booking.new(
+      checkin: params[:checkin],
+      checkout: params[:checkout],
+      total_fare: total_fare,
+      total_tax: total_tax,
+      room: room,
+      hotel: room.hotel
+    )
+    guests.times { @booking.passengers.build }
     1.times { @booking.contacts.build }
   end
 
@@ -32,20 +50,18 @@ class BookingsController < ApplicationController
   # POST /bookings or /bookings.json
   def create
     first_passenger = booking_params[:passengers_attributes]["0"]
-    @booking = Booking.new(booking_params)
-    @checkin = booking_params[:checkin]
-    @checkout = booking_params[:checkout]
-    @guests = booking_params[:passengers_attributes].length
-    @room = Room.includes(:room_type).find(booking_params[:room_id])
-    @booking.contacts.append(Contact.new(
+    @booking = Booking.new(booking_params.merge({
+      record_locator: ('A'..'Z').to_a.shuffle[0,6].join
+    }))
+    @booking.contacts << Contact.new(
       contact_type: "primary",
       name: "#{first_passenger[:first_name]} #{first_passenger[:last_name]}",
       phone_number: first_passenger[:phone_number]
-    ))
+    )
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to booking_url(@booking), notice: "Booking was successfully created." }
+        format.html { redirect_to booking_url(@booking), notice: "La reserva se ha creado exitosamente." }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,7 +74,7 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
-        format.html { redirect_to booking_url(@booking), notice: "Booking was successfully updated." }
+        format.html { redirect_to booking_url(@booking), notice: "La reserva fue actualizada exitosamente." }
         format.json { render :show, status: :ok, location: @booking }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -72,7 +88,7 @@ class BookingsController < ApplicationController
     @booking.destroy!
 
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: "Booking was successfully destroyed." }
+      format.html { redirect_to bookings_url, notice: "La reserva fue eliminada exitosamente." }
       format.json { head :no_content }
     end
   end
@@ -80,7 +96,7 @@ class BookingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
-      @booking = Booking.find(params[:id])
+      @booking = Booking.includes(:room, :hotel).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
@@ -94,13 +110,16 @@ class BookingsController < ApplicationController
         :primary_contact_id,
         :emergency_contact_id,
         :room_id,
+        :hotel_id,
         passengers_attributes: [
           :id,
           :first_name,
           :last_name,
+          :birth_date,
           :gender,
           :document_type,
           :document_number,
+          :email,
           :phone_number
         ],
         contacts_attributes: [

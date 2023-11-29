@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Hoteles&nbsp
+      |> Hoteles
       = yield :title
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
@@ -20,14 +20,12 @@ html
         .collapse.navbar-collapse
           ul.navbar-nav
             li.nav-item
-              a.nav-link.active[aria-current="page" href="/"]
-                | Inicio
+              = link_to "Inicio", root_path, class: "nav-link", aria: {current: "page"}
             li.nav-item
             - if agent_signed_in?
-              a.nav-link[href="#{hotels_path}" tabindex="-1" aria-disabled="true"]
-                | Panel de administración
+              = link_to "Panel de administración", hotels_path, class: "nav-link", tabindex: "-1", aria: {disabled: true}
+              = button_to "Cerrar sesión", destroy_agent_session_path, method: :delete, class: "nav-link"
             - else
-              a.nav-link[href="#{agent_session_path}" tabindex="-1" aria-disabled="true"]
-                | Iniciar sesión
+              = link_to "Iniciar sesión", agent_session_path, class: "nav-link", tabindex: "-1", aria: {disabled: "true"}
 
     = yield

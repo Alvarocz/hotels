@@ -1,58 +1,23 @@
 .container
   h1 Nueva reserva
+  p.mb-2
+    strong
+      |> Hotel:
+    => @booking.hotel.name
   p.mb-4
     strong
       |> Habitación:
-    => @room.room_type.name
+    => @booking.room.room_type.name
     |> para
-    = @room.max_persons
-    =< 'personas'.pluralize(@room.max_persons)
+    = @booking.room.max_persons
+    =< 'personas'.pluralize(@booking.room.max_persons)
+  = render "cart", booking: @booking
   h4 Datos personales
-  = form_with(model: @booking) do |form|
-    = form.hidden_field :checkin, value: @checkin
-    = form.hidden_field :checkout, value: @checkout
-    = form.hidden_field :total_fare, value: @total_fare
-    = form.hidden_field :total_tax, value: @total_tax
-    = form.hidden_field :hotel_id, value: @room.hotel_id
-    = form.hidden_field :room_id, value: @room.id
-    = form.fields_for :passengers do |pax_form|
-      .row
-        .form-outline.col-sm-6
-          = pax_form.label :first_name, class: "form-label"
-          = pax_form.text_field :first_name, class: "form-control"
-        .form-outline.col-sm-6
-          = pax_form.label :last_name, class: "form-label"
-          = pax_form.text_field :last_name, class: "form-control"
-      .row
-        .form-outline.col-sm-6
-          = pax_form.label :birth_date, class: "form-label"
-          = pax_form.date_field :birth_date, class: "form-control"
-        .form-outline.col-sm-6
-          = pax_form.label :gender, class: "form-label"
-          = pax_form.select :gender, Passenger.gender_options, {}, class: "form-select"
-      .row
-        .form-outline.col-sm-4
-          = pax_form.label :document_type, class: "form-label"
-          = pax_form.text_field :document_type, class: "form-control"
-        .form-outline.col-sm-8
-          = pax_form.label :document_number, class: "form-label"
-          = pax_form.text_field :document_number, class: "form-control"
-      .row.mb-4
-        .form-outline.col-sm-6
-          = pax_form.label :email, class: "form-label"
-          = pax_form.email_field :email, class: "form-control"
-        .form-outline.col-sm-6
-          = pax_form.label :phone_number, class: "form-label"
-          = pax_form.phone_field :phone_number, class: "form-control"
-      hr
-    p: strong Contacto de emergencia
-    = form.fields_for :contacts do |contact_form|
-      = contact_form.hidden_field :contact_type, value: "emergency"
-      .row.mb-4
-        .form-outline.col-sm-6
-          = contact_form.label :name, class: "form-label"
-          = contact_form.text_field :name, class: "form-control"
-        .form-outline.col-sm-6
-          = contact_form.label :phone_number, class: "form-label"
-          = contact_form.phone_field :phone_number, class: "form-control"
-    = form.submit "Siguiente", class: "btn btn-primary"
+  - if @booking.errors.any?
+    .alert.alert-danger[role="alert"]
+      p Debes revisar la información ingresada
+      ul
+        - @booking.errors.each do |error|
+          li
+            = error.full_message
+  = render "form", booking: @booking
