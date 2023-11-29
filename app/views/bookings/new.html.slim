@@ -1,23 +1,28 @@
 .container
   h1 Nueva reserva
-  p.mb-2
-    strong
-      |> Hotel:
-    => @booking.hotel.name
-  p.mb-4
-    strong
-      |> Habitación:
-    => @booking.room.room_type.name
-    |> para
-    = @booking.room.max_persons
-    =< 'personas'.pluralize(@booking.room.max_persons)
-  = render "cart", booking: @booking
-  h4 Datos personales
-  - if @booking.errors.any?
+  - if alert.present?
     .alert.alert-danger[role="alert"]
-      p Debes revisar la información ingresada
-      ul
-        - @booking.errors.each do |error|
-          li
-            = error.full_message
-  = render "form", booking: @booking
+      = alert
+    = link_to "Inicio", root_path
+  - if @booking.hotel
+    p.mb-2
+      strong
+        |> Hotel:
+      => @booking.hotel.name
+    p.mb-4
+      strong
+        |> Habitación:
+      => @booking.room.room_type.name
+      |> para
+      = @booking.room.max_persons
+      =< 'personas'.pluralize(@booking.room.max_persons)
+    = render "cart", booking: @booking
+    h4 Datos personales
+    - if @booking.errors.any?
+      .alert.alert-danger[role="alert"]
+        p Debes revisar la información ingresada
+        ul
+          - @booking.errors.each do |error|
+            li
+              = error.full_message
+    = render "form", booking: @booking

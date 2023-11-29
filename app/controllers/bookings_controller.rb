@@ -3,20 +3,8 @@ class BookingsController < ApplicationController
 
   # GET /bookings or /bookings.json
   def index
-    record_locator = params[:record_locator]
-    document_number = params[:document_number]
-    if record_locator.present?
-      @bookings = Booking.includes(:hotel, room: [:room_type]).where(record_locator: record_locator)
-    elsif document_number.present?
-      @bookings = Booking
-        .includes(:hotel, room: [:room_type])
-        .joins(:passengers)
-        .where("passengers.document_number = ?", document_number)
-        .distinct
-    else
-      @bookings = Booking.none
-    end
-    @bookings.order(created_at: :desc)
+    command = SearchBookings.call(params)
+    @bookings = command.result
   end
 
   # GET /bookings/1 or /bookings/1.json
@@ -25,22 +13,14 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    guests = params[:guests].to_i
-    room = Room.includes(:room_type, :hotel).find(params[:room_id])
-    total_fare = room.base_price * guests
-    total_tax = total_fare * (room.taxes / 100)
-
     @genders = %w[Masculino Femenino Otro]
-    @booking = Booking.new(
-      checkin: params[:checkin],
-      checkout: params[:checkout],
-      total_fare: total_fare,
-      total_tax: total_tax,
-      room: room,
-      hotel: room.hotel
-    )
-    guests.times { @booking.passengers.build }
-    1.times { @booking.contacts.build }
+    command = InitializeBooking.call(params)
+    if command.success?
+      @booking = command.result
+    else
+      @booking = Booking.new
+      flash.now[:alert] = command.errors.full_messages.to_sentence
+    end
   end
 
   # GET /bookings/1/edit
@@ -49,16 +29,8 @@ class BookingsController < ApplicationController
 
   # POST /bookings or /bookings.json
   def create
-    first_passenger = booking_params[:passengers_attributes]["0"]
-    @booking = Booking.new(booking_params.merge({
-      record_locator: ('A'..'Z').to_a.shuffle[0,6].join
-    }))
-    @booking.contacts << Contact.new(
-      contact_type: "primary",
-      name: "#{first_passenger[:first_name]} #{first_passenger[:last_name]}",
-      phone_number: first_passenger[:phone_number]
-    )
-
+    command = CreateBooking.call(booking_params)
+    @booking = command.result
     respond_to do |format|
       if @booking.save
         BookingMailer.with(booking: @booking).new_booking.deliver_later

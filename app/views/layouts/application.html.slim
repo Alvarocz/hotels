@@ -22,6 +22,8 @@ html
             li.nav-item
               = link_to "Inicio", root_path, class: "nav-link", aria: {current: "page"}
             li.nav-item
+              = link_to "Mis reservas", bookings_path, class: "nav-link", aria: {current: "page"}
+            li.nav-item
             - if agent_signed_in?
               = link_to "Panel de administración", hotels_path, class: "nav-link", tabindex: "-1", aria: {disabled: true}
               = button_to "Cerrar sesión", destroy_agent_session_path, method: :delete, class: "nav-link"
