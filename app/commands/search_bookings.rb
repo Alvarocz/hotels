@@ -9,6 +9,7 @@ class SearchBookings
   def call
     record_locator = @params[:record_locator]
     document_number = @params[:document_number]
+    hotel_id = @params[:hotel_id]
     if record_locator.present?
       bookings = Booking.includes(:hotel, room: [:room_type]).where(record_locator: record_locator)
     elsif document_number.present?
@@ -17,6 +18,8 @@ class SearchBookings
         .joins(:passengers)
         .where("passengers.document_number = ?", document_number)
         .distinct
+    elsif hotel_id.present?
+      bookings = Booking.includes(:hotel, room: [:room_type]).where(hotel_id: hotel_id)
     else
       bookings = Booking.none
     end

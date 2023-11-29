@@ -18,6 +18,11 @@ div(id="#{dom_id booking}")
   p.my-2
     strong Check-out:
     =< l booking.checkout
+  h4 Huéspedes
+  = render "passengers/index", passengers: booking.passengers
+  h4 Contacto de emergencia
+  = render "contacts/index", contacts: booking.contacts
+  h4 Cobros
   = render "cart", booking: booking
 - if action_name != "show"
   = link_to "Detalles", booking, class: "btn btn-light mb-2"

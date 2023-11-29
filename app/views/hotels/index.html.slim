@@ -21,16 +21,21 @@
           | Activo
         th[scope="col"]
           | Fecha de creación
+        th[scope="col"]
+          | Acciones
     tbody
       - for hotel in @hotels
         tr
           td = link_to hotel.name, hotel
           td = hotel.description
           td = hotel.num_rooms
-          td = hotel.bookings.count
+          td = link_to hotel.bookings.count, controller: "bookings", action: "index", hotel_id: hotel.id
           td
             = hotel.city
             |> ,
             = hotel.country
           td = t(hotel.is_active)
           td = l hotel.created_at
+          td
+            a.btn.btn-light.btn-sm(href="#{edit_hotel_path(hotel)}")
+              i.fa-solid.fa-pen-to-square

@@ -1,0 +1,30 @@
+table.table
+  thead
+    tr
+      th(scope="row")
+        | Nombre
+      th(scope="row")
+        | Apellido
+      th(scope="row")
+        | Fecha de nacimiento
+      th(scope="row")
+        | Género
+      th(scope="row")
+        | Tipo de documento
+      th(scope="row")
+        | Número de documento
+      th(scope="row")
+        | Correo
+      th(scope="row")
+        | Teléfono
+  tbody
+    - for passenger in passengers
+      tr
+        td = passenger.first_name
+        td = passenger.last_name
+        td = l passenger.birth_date
+        td = passenger.gender
+        td = passenger.document_type
+        td = passenger.document_number
+        td = passenger.email
+        td = passenger.phone_number

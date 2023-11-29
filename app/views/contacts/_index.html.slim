@@ -1,0 +1,10 @@
+table.table
+  thead
+    tr
+      th Nombre
+      th Teléfono
+  tbody
+    - for contact in contacts
+      tr
+        td = contact.name
+        td = contact.phone_number

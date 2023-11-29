@@ -9,10 +9,6 @@ class HomeController < ApplicationController
     @cities = Hotel.pluck(:city).uniq.map { |city| [city, city] }
 
     command = SearchRooms.call(params)
-    if command.success?
-      @rooms = command.result
-    else
-      @rooms = Room.all.order("base_price DESC")
-    end
+    @rooms = command.result
   end
 end

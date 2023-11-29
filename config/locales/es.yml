@@ -90,5 +90,5 @@ es:
         precision: 2
   emergency: de emergencia
   primary: principal
-  "true": Sí
-  "false": No
+  "true": "Sí"
+  "false": "No"
