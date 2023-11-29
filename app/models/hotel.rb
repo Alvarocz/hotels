@@ -3,4 +3,5 @@ class Hotel < ApplicationRecord
 
   has_many :room_types
   has_many :rooms
+  has_many :bookings
 end

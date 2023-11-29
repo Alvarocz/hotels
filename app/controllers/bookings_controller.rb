@@ -61,6 +61,7 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        BookingMailer.with(booking: @booking).new_booking.deliver_later
         format.html { redirect_to booking_url(@booking), notice: "La reserva se ha creado exitosamente." }
         format.json { render :show, status: :created, location: @booking }
       else

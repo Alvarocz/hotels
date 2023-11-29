@@ -18,5 +18,15 @@ module HotelsRails
 
     config.time_zone = "America/Bogota"
     config.i18n.default_locale = :es
+
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      user_name: "alvaroczxp@gmail.com",
+      password: "",
+      authentication: :login,
+      ssl: true,
+      tls: true
+    }
   end
 end

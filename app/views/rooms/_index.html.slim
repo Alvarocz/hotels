@@ -23,9 +23,12 @@ table.table
         td = room.base_price
         td = room.taxes
         td = room.max_persons
-        td = room.is_active
-        td
-          a(href="#{room_path(room)}")
+        td = t(room.is_active)
+        td.p-0
+          a.btn.btn-light.btn-sm(href="#{room_path(room)}")
             i.fa-solid.fa-eye
-          a(href="#{edit_room_path(room)}")
+          a.btn.btn-light.btn-sm(href="#{edit_room_path(room)}")
             i.fa-solid.fa-pen-to-square
+          // button.btn.btn-light.btn-sm(href="#{room_path(room)}" method="delete")
+          //   i.fa-solid.fa-x
+          = button_to "X", room_path(room), method: "delete", class: "btn btn-light btn-sm"

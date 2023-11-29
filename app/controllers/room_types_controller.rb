@@ -49,10 +49,11 @@ class RoomTypesController < ApplicationController
 
   # DELETE /room_types/1 or /room_types/1.json
   def destroy
+    hotel_id = @room_type.hotel_id
     @room_type.destroy!
 
     respond_to do |format|
-      format.html { redirect_to hotel_url(params[:hotel_id]), notice: "El tipo de habitación fue eliminado." }
+      format.html { redirect_to hotel_url(hotel_id), notice: "El tipo de habitación fue eliminado." }
       format.json { head :no_content }
     end
   end

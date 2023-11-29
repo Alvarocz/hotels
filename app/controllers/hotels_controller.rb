@@ -3,14 +3,13 @@ class HotelsController < ApplicationController
 
   # GET /hotels or /hotels.json
   def index
-    @hotels = Hotel.all
+    @hotels = Hotel.includes(:bookings).where(agent: current_agent)
   end
 
   # GET /hotels/1 or /hotels/1.json
   def show
-    @room = Room.new
     @room_type = RoomType.new
-    @room_types = @hotel.room_types
+    @room = Room.new(room_type: @room_type, hotel: @hotel)
   end
 
   # GET /hotels/new

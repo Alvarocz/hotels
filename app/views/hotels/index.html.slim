@@ -14,6 +14,8 @@
         th[scope="col"]
           | Habitaciones
         th[scope="col"]
+          | Reservas
+        th[scope="col"]
           | Ciudad
         th[scope="col"]
           | Activo
@@ -22,17 +24,13 @@
     tbody
       - for hotel in @hotels
         tr
-          td
-            = link_to hotel.name, hotel
-          td
-            = hotel.description
-          td
-            = hotel.num_rooms
+          td = link_to hotel.name, hotel
+          td = hotel.description
+          td = hotel.num_rooms
+          td = hotel.bookings.count
           td
             = hotel.city
             |> ,
             = hotel.country
-          td
-            = hotel.is_active
-          td
-            = l hotel.created_at
+          td = t(hotel.is_active)
+          td = l hotel.created_at

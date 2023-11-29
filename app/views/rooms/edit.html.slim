@@ -1,6 +1,8 @@
-.mx-auto.md:w-2/3.w-full
-  h1.font-bold.text-4xl
-    | Editing room
+.container
+  h2
+    | Editar habitación
+    =< @room.identifier
   = render "form", room: @room
-  = link_to "Show this room", @room, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-  = link_to "Back to rooms", rooms_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  = link_to "Detalles", @room, class: "btn btn-light mb-2"
+  br/
+  = link_to "Ir al hotel", hotel_path(@room.hotel_id)

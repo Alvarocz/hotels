@@ -14,5 +14,8 @@ test:
   database: hotels_test
 
 production:
-  <<: *default
-  database: hotels_prod
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000

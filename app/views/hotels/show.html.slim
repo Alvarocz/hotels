@@ -27,7 +27,7 @@
       = render "room_types/index", room_types: @room_types
     .col-sm-1.col-md-7.border.bg-light.py-4
       h4 Habitaciones
-      - if @room_types.present?
+      - if @hotel.room_types
         = render "rooms/form", room: @room
         hr
       = render "rooms/index", rooms: @hotel.rooms

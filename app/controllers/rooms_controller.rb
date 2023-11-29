@@ -50,10 +50,11 @@ class RoomsController < ApplicationController
 
   # DELETE /rooms/1 or /rooms/1.json
   def destroy
+    hotel_id = @room.hotel_id
     @room.destroy!
 
     respond_to do |format|
-      format.html { redirect_to hotel_url(params[:hotel_id]), notice: "La habitación fue eliminada" }
+      format.html { redirect_to hotel_url(hotel_id), notice: "La habitación fue eliminada" }
       format.json { head :no_content }
     end
   end
@@ -61,7 +62,7 @@ class RoomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
-      @room = Room.find(params[:id])
+      @room = Room.includes(:room_type, :hotel).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

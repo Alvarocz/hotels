@@ -47,7 +47,7 @@ es:
         room_type_id: Tipo de habitación
         identifier: Número
         base_price: Precio base
-        taxes: Impuestos
+        taxes: Impuestos (%)
         max_persons: Capacidad
         is_active: Activa
         hotel: Hotel
@@ -90,3 +90,5 @@ es:
         precision: 2
   emergency: de emergencia
   primary: principal
+  "true": Sí
+  "false": No

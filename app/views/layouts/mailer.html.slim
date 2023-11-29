@@ -2,7 +2,20 @@ doctype html
 html
   head
     meta[http-equiv="Content-Type" content="text/html; charset=utf-8"]
-    style
-      |  /* Email styles need to be inline */ 
+    css:
+      .container {
+        margin: 0 2rem;
+      }
+      section {
+        padding: 2rem;
+      }
+      section.title {
+        color: white;
+        background: #B57654;
+      }
   body
-    = yield
+    .container
+      section.title
+        = yield :title
+      section
+        = yield

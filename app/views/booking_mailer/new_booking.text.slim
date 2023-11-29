@@ -1,0 +1,14 @@
+| Tu reserva se ha creado
+============================
+
+| Código de reserva:
+=< @booking.record_locator
+
+| Habitación
+= @booking.room.room_type.name
+|<> para
+= @booking.room.max_persons
+=< 'persona'.pluralize(@booking.room.max_persons)
+
+| Valor:
+=< number_to_currency(@booking.total)

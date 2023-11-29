@@ -6,7 +6,7 @@ table.table
       th[scope="col"]
         | Tamaño
   tbody
-    - for room_type in room_types
+    - for room_type in @hotel.room_types
       tr
         th = room_type.name
         td = room_type.size

@@ -1,9 +1,9 @@
-= form_with(model: room, class: "contents") do |form|
-  = form.hidden_field :hotel_id, value: @hotel.id
+= form_with(model: room) do |form|
+  = form.hidden_field :hotel_id
   .row.mb-2
     .form-outline.col-sm-1.col-md-3
       = form.label :room_type_id, class: "form-label"
-      = form.collection_select :room_type_id, @room_types, :id, :name, {}, {class: "form-select"}
+      = form.collection_select :room_type_id, room.hotel.room_types, :id, :name, {}, {class: "form-select"}
     .form-outline.col-sm-1.col-md-3
       = form.label :identifier, class: "form-label"
       = form.text_field :identifier, class: "form-control"
@@ -13,7 +13,7 @@
     .form-outline.col-sm-1.col-md-3
       = form.label :taxes, class: "form-label"
       = form.number_field :taxes, min: 0, class: "form-control"
-  .row
+  .row.mb-2
     .col-sm-1.col-md-5
       = form.label :max_persons, class: "visually-hidden"
       .input-group
@@ -24,4 +24,4 @@
       = form.check_box :is_active, checked: true, class: "form-check-input"
       = form.label :is_active, class: "form-check-label"
     .form-outline.col-sm-1.col-md-2
-      = form.submit "Agregar", class: "btn btn-primary"
+      = form.submit class: "btn btn-primary"

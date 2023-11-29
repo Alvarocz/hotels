@@ -1,35 +1,33 @@
-| <div id="
-= dom_id room
-| "> 
-p.my-5
-  strong.block.font-medium.mb-1
-    | Type:
-  = room.type
-p.my-5
-  strong.block.font-medium.mb-1
-    | Identifier:
-  = room.identifier
-p.my-5
-  strong.block.font-medium.mb-1
-    | Base price:
-  = room.base_price
-p.my-5
-  strong.block.font-medium.mb-1
-    | Taxes:
-  = room.taxes
-p.my-5
-  strong.block.font-medium.mb-1
-    | Max persons:
-  = room.max_persons
-p.my-5
-  strong.block.font-medium.mb-1
-    | Hotel:
-  = room.hotel_id
-p.my-5
-  strong.block.font-medium.mb-1
-    | Is active:
-  = room.is_active
-- if action_name != "show"
-  = link_to "Show this room", room, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-  = link_to "Edit this room", edit_room_path(room), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
-  hr.mt-6
+div(id="#{dom_id room}")
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Tipo:
+    =< room.room_type.name
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Número:
+    =< room.identifier
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Precio base:
+    =< room.base_price
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Impuesto:
+    =< room.taxes
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Capacidad:
+    =< room.max_persons
+    =< 'persona'.pluralize(room.max_persons)
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Hotel:
+    =< room.hotel.name
+  p.my-2
+    strong.block.font-medium.mb-1
+      | Activa:
+    =< room.is_active
+  - if action_name != "show"
+    = link_to "Detalles", room, class: "btn.btn-light.mb-2"
+    = link_to "Editar", edit_room_path(room), class: "btn btn-priary mb-4"
