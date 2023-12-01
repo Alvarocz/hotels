@@ -19,15 +19,17 @@
     .col-sm-2.col-md-1
       = button_to "Eliminar", hotel_path(@hotel), method: :delete, class: "btn btn-danger"
 .container-fluid
-  .row
-    .col-sm-1.col-md-5.border.bg-light.py-4
-      h4 Tipos de habitaciones
-      = render "room_types/form", room_type: @room_type
-      hr/
-      = render "room_types/index", room_types: @room_types
-    .col-sm-1.col-md-7.border.bg-light.py-4
-      h4 Habitaciones
-      - if @hotel.room_types
-        = render "rooms/form", room: @room
-        hr
-      = render "rooms/index", rooms: @hotel.rooms
+  .row.g-2
+    .col-sm-1.col-md-5
+      .border.rounded-3.bg-light.px-2.py-2
+        h4 Tipos de habitaciones
+        = render "room_types/form", room_type: @room_type
+        hr/
+        = render "room_types/index", room_types: @room_types
+    .col-sm-1.col-md-7
+      .border.rounded-3.bg-light.px-2.py-2
+        h4 Habitaciones
+        - if @hotel.room_types
+          = render "rooms/form", room: @room
+          hr
+        = render "rooms/index", rooms: @hotel.rooms
